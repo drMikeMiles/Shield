@@ -8,10 +8,14 @@ const lv_img_dsc_t *anim_imgs[] = {
     &crystal_01,
 };
 
-void draw_animation(lv_obj_t *canvas) {
+
 #if IS_ENABLED(CONFIG_NICE_VIEW_GEM_ANIMATION)
-    lv_obj_t *art = lv_animimg_create(canvas);
-    lv_obj_center(art);
+int draw_animation(struct zmk_widget_status *widget, lv_obj_t *canvas) {
+    widget->obj = lv_obj_create(canvas);
+    lv_obj_set_size(widget->obj, 160, 68);
+    lv_obj_t *top = lv_canvas_create(widget->obj);
+    lv_obj_align(top, LV_ALIGN_TOP_RIGHT, 0, 0);
+    lv_canvas_set_buffer(top, widget->cbuf, CANVAS_SIZE, CANVAS_SIZE, LV_IMG_CF_TRUE_COLOR);
 
     lv_animimg_set_src(art, (const void **)anim_imgs, 1);
     lv_animimg_set_duration(art, CONFIG_NICE_VIEW_GEM_ANIMATION_MS);

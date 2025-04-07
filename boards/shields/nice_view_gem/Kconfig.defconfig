@@ -1,9 +1,5 @@
 if SHIELD_NICE_VIEW_GEM
 
-config CUSTOM_ANIMATION_SPEED
-    int "Total duration in milliseconds for animation to take"
-    default 300000
-
 config LV_Z_VDB_SIZE
     default 100
 

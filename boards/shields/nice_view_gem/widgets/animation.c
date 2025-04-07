@@ -6,6 +6,7 @@ LV_IMG_DECLARE(crystal_01);
 
 const lv_img_dsc_t *anim_imgs[] = {
     &crystal_01,
+    &crystal_02,
 };
 
 void draw_animation(lv_obj_t *canvas) {

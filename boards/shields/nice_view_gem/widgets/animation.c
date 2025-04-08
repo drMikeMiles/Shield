@@ -4,10 +4,16 @@
 
 LV_IMG_DECLARE(crystal_01);
 LV_IMG_DECLARE(crystal_02);
+LV_IMG_DECLARE(crystal_03);
+LV_IMG_DECLARE(crystal_04);
+LV_IMG_DECLARE(crystal_05);
 
 const lv_img_dsc_t *anim_imgs[] = {
     &crystal_01,
     &crystal_02,
+	&crystal_03,
+	&crystal_04,
+	&crystal_05,
 };
 
 void draw_animation(lv_obj_t *canvas) {
@@ -15,7 +21,7 @@ void draw_animation(lv_obj_t *canvas) {
     lv_obj_t *art = lv_animimg_create(canvas);
     lv_obj_center(art);
 
-    lv_animimg_set_src(art, (const void **)anim_imgs, 2);
+    lv_animimg_set_src(art, (const void **)anim_imgs, 5);
     lv_animimg_set_duration(art, CONFIG_NICE_VIEW_GEM_ANIMATION_MS);
     lv_animimg_set_repeat_count(art, LV_ANIM_REPEAT_INFINITE);
     lv_animimg_start(art);

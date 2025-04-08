@@ -192,11 +192,11 @@ const lv_img_dsc_t crystal_02 = {
   .data = crystal_02_map,
 };
 
-#ifndef LV_ATTRIBUTE_IMG_CRYSTAL_3
-#define LV_ATTRIBUTE_IMG_CRYSTAL_3
+#ifndef LV_ATTRIBUTE_IMG_CRYSTAL_03
+#define LV_ATTRIBUTE_IMG_CRYSTAL_03
 #endif
 
-const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_CRYSTAL_3 uint8_t crystal_3_map[] = {
+const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_CRYSTAL_03 uint8_t crystal_03_map[] = {
 #if CONFIG_NICE_VIEW_WIDGET_INVERTED
         0xff, 0xff, 0xff, 0xff, /*Color of index 0*/
         0x00, 0x00, 0x00, 0xff, /*Color of index 1*/
@@ -275,22 +275,22 @@ const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_CRYSTAL_3
   0xf8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0xf0, 
 };
 
-const lv_img_dsc_t crystal_3 = {
+const lv_img_dsc_t crystal_03 = {
   .header.cf = LV_IMG_CF_INDEXED_1BIT,
   .header.always_zero = 0,
   .header.reserved = 0,
   .header.w = 140,
   .header.h = 68,
   .data_size = 1232,
-  .data = crystal_3_map,
+  .data = crystal_03_map,
 };
 
 
-#ifndef LV_ATTRIBUTE_IMG_CRYSTAL_4
-#define LV_ATTRIBUTE_IMG_CRYSTAL_4
+#ifndef LV_ATTRIBUTE_IMG_CRYSTAL_04
+#define LV_ATTRIBUTE_IMG_CRYSTAL_04
 #endif
 
-const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_CRYSTAL_4 uint8_t crystal_4_map[] = {
+const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_CRYSTAL_04 uint8_t crystal_04_map[] = {
 #if CONFIG_NICE_VIEW_WIDGET_INVERTED
         0xff, 0xff, 0xff, 0xff, /*Color of index 0*/
         0x00, 0x00, 0x00, 0xff, /*Color of index 1*/
@@ -369,22 +369,22 @@ const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_CRYSTAL_4
   0xf8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0xf0, 
 };
 
-const lv_img_dsc_t crystal_4 = {
+const lv_img_dsc_t crystal_04 = {
   .header.cf = LV_IMG_CF_INDEXED_1BIT,
   .header.always_zero = 0,
   .header.reserved = 0,
   .header.w = 140,
   .header.h = 68,
   .data_size = 1232,
-  .data = crystal_4_map,
+  .data = crystal_04_map,
 };
 
 
-#ifndef LV_ATTRIBUTE_IMG_CRYSTAL_5
-#define LV_ATTRIBUTE_IMG_CRYSTAL_5
+#ifndef LV_ATTRIBUTE_IMG_CRYSTAL_05
+#define LV_ATTRIBUTE_IMG_CRYSTAL_05
 #endif
 
-const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_CRYSTAL_5 uint8_t crystal_5_map[] = {
+const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_CRYSTAL_05 uint8_t crystal_05_map[] = {
 #if CONFIG_NICE_VIEW_WIDGET_INVERTED
         0xff, 0xff, 0xff, 0xff, /*Color of index 0*/
         0x00, 0x00, 0x00, 0xff, /*Color of index 1*/
@@ -463,12 +463,12 @@ const LV_ATTRIBUTE_MEM_ALIGN LV_ATTRIBUTE_LARGE_CONST LV_ATTRIBUTE_IMG_CRYSTAL_5
   0xf8, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0xf0, 
 };
 
-const lv_img_dsc_t crystal_5 = {
+const lv_img_dsc_t crystal_05 = {
   .header.cf = LV_IMG_CF_INDEXED_1BIT,
   .header.always_zero = 0,
   .header.reserved = 0,
   .header.w = 140,
   .header.h = 68,
   .data_size = 1232,
-  .data = crystal_5_map,
+  .data = crystal_05_map,
 };

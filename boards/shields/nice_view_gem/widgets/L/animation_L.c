@@ -1,6 +1,6 @@
 #include <stdlib.h>
 #include <zephyr/kernel.h>
-#include "animation.h"
+#include "animation_L.h"
 
 LV_IMG_DECLARE(crystal_01);
 LV_IMG_DECLARE(crystal_02);

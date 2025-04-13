@@ -13,7 +13,7 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/display.h>
 #include <zmk/usb.h>
 
-#include "L/animation.h"
+#include "L/animation_L.h"
 #include "L/battery_L.h"
 #include "L/output_L.h"
 #include "screen_peripheral.h"

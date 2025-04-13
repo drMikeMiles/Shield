@@ -18,12 +18,12 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/usb.h>
 #include <zmk/wpm.h>
 
-#include "battery.h"
-#include "layer.h"
-#include "output.h"
-#include "profile.h"
+#include "R/battery.h"
+#include "R/layer.h"
+#include "R/output.h"
+#include "R/profile.h"
 #include "screen.h"
-#include "wpm.h"
+#include "R/wpm.h"
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 

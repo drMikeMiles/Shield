@@ -1,5 +1,5 @@
 #include <zephyr/kernel.h>
-#include "output.h"
+#include "outputR.h"
 #include "../../assets/custom_fonts.h"
 
 LV_IMG_DECLARE(bt_no_signal);

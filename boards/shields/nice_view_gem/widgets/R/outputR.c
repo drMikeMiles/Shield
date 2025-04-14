@@ -19,7 +19,7 @@ static void draw_ble_unbonded_right(lv_obj_t *canvas) {
     lv_draw_img_dsc_t img_dsc;
     lv_draw_img_dsc_init(&img_dsc);
 
-    lv_canvas_draw_img(canvas, 0, 0, &bt_unbonded, &img_dsc);
+    lv_canvas_draw_img(canvas, 5, 0, &bt_unbonded, &img_dsc);
 }
 #endif
 
@@ -27,14 +27,14 @@ static void draw_ble_disconnected_right(lv_obj_t *canvas) {
     lv_draw_img_dsc_t img_dsc;
     lv_draw_img_dsc_init(&img_dsc);
 
-    lv_canvas_draw_img(canvas, 0, 0, &bt_no_signal, &img_dsc);
+    lv_canvas_draw_img(canvas, 5, 0, &bt_no_signal, &img_dsc);
 }
 
 static void draw_ble_connected_right(lv_obj_t *canvas) {
     lv_draw_img_dsc_t img_dsc;
     lv_draw_img_dsc_init(&img_dsc);
 
-    lv_canvas_draw_img(canvas, 0, 0, &bt, &img_dsc);
+    lv_canvas_draw_img(canvas, 5, 0, &bt, &img_dsc);
 }
 
 void draw_output_status_right(lv_obj_t *canvas, const struct status_state *state) {

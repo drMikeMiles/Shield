@@ -12,7 +12,7 @@ static void draw_usb_connected_right(lv_obj_t *canvas) {
     lv_draw_img_dsc_t img_dsc;
     lv_draw_img_dsc_init(&img_dsc);
 
-    lv_canvas_draw_img(canvas, 0, 2, &usb, &img_dsc);
+    lv_canvas_draw_img(canvas, 5, 2, &usb, &img_dsc);
 }
 
 static void draw_ble_unbonded_right(lv_obj_t *canvas) {

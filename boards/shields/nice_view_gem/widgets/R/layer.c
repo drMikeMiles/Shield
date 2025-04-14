@@ -1,6 +1,6 @@
 #include <zephyr/kernel.h>
 #include "layer.h"
-#include "../assets/custom_fonts.h"
+#include "../../assets/custom_fonts.h"
 
 void draw_layer_status(lv_obj_t *canvas, const struct status_state *state) {
     lv_draw_label_dsc_t label_dsc;

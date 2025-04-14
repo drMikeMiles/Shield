@@ -1,7 +1,7 @@
 #include <math.h>
 #include <zephyr/kernel.h>
 #include "wpm.h"
-#include "../assets/custom_fonts.h"
+#include "../../assets/custom_fonts.h"
 
 LV_IMG_DECLARE(gauge);
 LV_IMG_DECLARE(grid);

@@ -24,6 +24,8 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include "L/profile.h"
 #include "screen.h"
 #include "L/wpm.h"
+#include "L/hid_indicators.h"
+
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
@@ -66,6 +68,33 @@ static void draw_bottom(lv_obj_t *widget, lv_color_t cbuf[], const struct status
     rotate_canvas(canvas, cbuf);
 }
 
+/**
+ * Draw Indicator
+ **/
+#if IS_ENABLED(CONFIG_ZMK_HID_INDICATORS)
+static struct zmk_widget_hid_indicators hid_indicators_widget;
+#endif
+#lv_style_t global_style;
+
+lv_obj_t *zmk_display_status_screen() {
+    lv_obj_t *screen;
+
+    screen = lv_obj_create(NULL);
+
+    lv_style_init(&global_style);
+    lv_style_set_text_font(&global_style, &lv_font_unscii_8);
+    lv_style_set_text_letter_space(&global_style, 1);
+    lv_style_set_text_line_space(&global_style, 1);
+    lv_obj_add_style(screen, &global_style, LV_PART_MAIN);
+
+    #if IS_ENABLED(CONFIG_ZMK_HID_INDICATORS)
+    zmk_widget_hid_indicators_init(&hid_indicators_widget, screen);
+    lv_obj_align_to(zmk_widget_hid_indicators_obj(&hid_indicators_widget), zmk_widget_modifiers_obj(&modifiers_widget), LV_ALIGN_OUT_TOP_LEFT, 0, -2);
+    #endif
+
+    return screen;
+}
+	
 /**
  * Battery status
  **/

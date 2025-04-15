@@ -33,7 +33,7 @@ static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
  **/
 
 #if IS_ENABLED(CONFIG_NICE_VIEW_WIDGET_HID_INDICATORS)
-#include "hid_indicators.h"
+#include "L/hid_indicators.h"
 static struct zmk_widget_hid_indicators hid_indicators_widget;
 #endif
 

@@ -38,7 +38,10 @@ config NICE_VIEW_GEM_WPM_FIXED_RANGE_MAX
 config NICE_VIEW_GEM_ANIMATION
     bool "Enable animation on peripheral"
     default y
-
+#newS	
+config CONFIG_ZMK_HID_INDICATORS
+	default y
+#newE
 config NICE_VIEW_GEM_ANIMATION_MS
     int "Animation length in milliseconds"
     default 100000
@@ -61,3 +64,5 @@ config NICE_VIEW_WIDGET_STATUS
 endif # !ZMK_SPLIT || ZMK_SPLIT_ROLE_CENTRAL
 
 endif # SHIELD_NICE_VIEW_GEM
+
+

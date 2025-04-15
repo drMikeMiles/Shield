@@ -2,12 +2,12 @@
 
 #include <lvgl.h>
 #include <zephyr/kernel.h>
-#include "util.h"
+#include "L/util.h"
 
 struct zmk_widget_screen {
     sys_snode_t node;
     lv_obj_t *obj;
-    lv_color_t cbuf[CANVAS_HEIGHT * CANVAS_HEIGHT];
+    lv_color_t cbuf[BUFFER_SIZE * BUFFER_SIZE];
     struct status_state state;
 };
 

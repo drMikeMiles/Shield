@@ -13,24 +13,24 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/display.h>
 #include <zmk/usb.h>
 
-#include "animation.h"
-#include "battery.h"
-#include "output.h"
+#include "R/animation.h"
+#include "R/batteryR.h"
+#include "R/outputR.h"
 #include "screen_peripheral.h"
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
 /**
- * Draw canvas
+ * Draw buffers
  **/
 
-static void draw_canvas(lv_obj_t *widget, lv_color_t cbuf[], const struct status_state *state) {
+static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_state *state) {
     lv_obj_t *canvas = lv_obj_get_child(widget, 0);
+    fill_background(canvas);
 
     // Draw widgets
-    draw_background(canvas);
-    draw_output_status(canvas, state);
-    draw_battery_status(canvas, state);
+    draw_output_status_right(canvas, state);
+    draw_battery_status_right(canvas, state);
 
     // Rotate for horizontal display
     rotate_canvas(canvas, cbuf);
@@ -48,7 +48,7 @@ static void set_battery_status(struct zmk_widget_screen *widget,
 
     widget->state.battery = state.level;
 
-    draw_canvas(widget->obj, widget->cbuf, &widget->state);
+    draw_top(widget->obj, widget->cbuf, &widget->state);
 }
 
 static void battery_status_update_cb(struct battery_status_state state) {
@@ -87,7 +87,7 @@ static void set_connection_status(struct zmk_widget_screen *widget,
                                   struct peripheral_status_state state) {
     widget->state.connected = state.connected;
 
-    draw_canvas(widget->obj, widget->cbuf, &widget->state);
+    draw_top(widget->obj, widget->cbuf, &widget->state);
 }
 
 static void output_status_update_cb(struct peripheral_status_state state) {
@@ -105,13 +105,13 @@ ZMK_SUBSCRIPTION(widget_peripheral_status, zmk_split_peripheral_status_changed);
 
 int zmk_widget_screen_init(struct zmk_widget_screen *widget, lv_obj_t *parent) {
     widget->obj = lv_obj_create(parent);
-    lv_obj_set_size(widget->obj, CANVAS_HEIGHT, CANVAS_WIDTH);
+    lv_obj_set_size(widget->obj, SCREEN_HEIGHT, SCREEN_WIDTH);
 
-    lv_obj_t *canvas = lv_canvas_create(widget->obj);
-    lv_obj_align(canvas, LV_ALIGN_TOP_LEFT, 0, 0);
-    lv_canvas_set_buffer(canvas, widget->cbuf, CANVAS_HEIGHT, CANVAS_HEIGHT, LV_IMG_CF_TRUE_COLOR);
+    lv_obj_t *top = lv_canvas_create(widget->obj);
+    lv_obj_align(top, LV_ALIGN_TOP_RIGHT, 0, 0);
+    lv_canvas_set_buffer(top, widget->cbuf, BUFFER_SIZE, BUFFER_SIZE, LV_IMG_CF_TRUE_COLOR);
 
-    draw_animation(canvas, widget);
+    draw_animation(widget->obj);
 
     sys_slist_append(&widgets, &widget->node);
     widget_battery_status_init();

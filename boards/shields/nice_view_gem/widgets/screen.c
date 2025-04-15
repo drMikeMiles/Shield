@@ -18,49 +18,56 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/usb.h>
 #include <zmk/wpm.h>
 
-#include "L/battery.h"
-#include "L/layer.h"
-#include "L/output.h"
-#include "L/profile.h"
+#include "battery.h"
+#include "layer.h"
+#include "output.h"
+#include "profile.h"
 #include "screen.h"
-#include "L/wpm.h"
-
+#include "wpm.h"
 
 static sys_slist_t widgets = SYS_SLIST_STATIC_INIT(&widgets);
 
-
 /**
- * Draw buffers
+ * luna
  **/
 
-static void draw_top(lv_obj_t *widget, lv_color_t cbuf[], const struct status_state *state) {
+#if IS_ENABLED(CONFIG_NICE_OLED_WIDGET_WPM)
+#include "luna.h"
+static struct zmk_widget_luna luna_widget;
+#endif
+
+/**
+ * modifiers
+ **/
+#if IS_ENABLED(CONFIG_NICE_OLED_WIDGET_MODIFIERS_INDICATORS)
+#include "modifiers.h"                               // Incluir el archivo de cabecera de modifiers
+static struct zmk_widget_modifiers modifiers_widget; // Declarar el widget de modifiers
+#endif
+
+/**
+ * hid indicators
+ **/
+
+#if IS_ENABLED(CONFIG_NICE_OLED_WIDGET_HID_INDICATORS)
+#include "hid_indicators.h"
+static struct zmk_widget_hid_indicators hid_indicators_widget;
+#endif
+
+/**
+ * Draw canvas
+ **/
+
+static void draw_canvas(lv_obj_t *widget, lv_color_t cbuf[], const struct status_state *state) {
     lv_obj_t *canvas = lv_obj_get_child(widget, 0);
-    fill_background(canvas);
 
     // Draw widgets
+    draw_background(canvas);
     draw_output_status(canvas, state);
-    draw_battery_status(canvas, state);
-
-    // Rotate for horizontal display
-    rotate_canvas(canvas, cbuf);
-}
-
-static void draw_middle(lv_obj_t *widget, lv_color_t cbuf[], const struct status_state *state) {
-    lv_obj_t *canvas = lv_obj_get_child(widget, 1);
-    fill_background(canvas);
-
-    // Draw widgets
+    // TODO: charging animation START
+    // change the position
     draw_wpm_status(canvas, state);
-
-    // Rotate for horizontal display
-    rotate_canvas(canvas, cbuf);
-}
-
-static void draw_bottom(lv_obj_t *widget, lv_color_t cbuf[], const struct status_state *state) {
-    lv_obj_t *canvas = lv_obj_get_child(widget, 2);
-    fill_background(canvas);
-
-    // Draw widgets
+    draw_battery_status(canvas, state);
+    // TODO: charging animation END
     draw_profile_status(canvas, state);
     draw_layer_status(canvas, state);
 
@@ -77,9 +84,10 @@ static void set_battery_status(struct zmk_widget_screen *widget,
 #if IS_ENABLED(CONFIG_USB_DEVICE_STACK)
     widget->state.charging = state.usb_present;
 #endif /* IS_ENABLED(CONFIG_USB_DEVICE_STACK) */
+
     widget->state.battery = state.level;
 
-    draw_top(widget->obj, widget->cbuf, &widget->state);
+    draw_canvas(widget->obj, widget->cbuf, &widget->state);
 }
 
 static void battery_status_update_cb(struct battery_status_state state) {
@@ -114,7 +122,7 @@ static void set_layer_status(struct zmk_widget_screen *widget, struct layer_stat
     widget->state.layer_index = state.index;
     widget->state.layer_label = state.label;
 
-    draw_bottom(widget->obj, widget->cbuf3, &widget->state);
+    draw_canvas(widget->obj, widget->cbuf, &widget->state);
 }
 
 static void layer_status_update_cb(struct layer_status_state state) {
@@ -143,8 +151,7 @@ static void set_output_status(struct zmk_widget_screen *widget,
     widget->state.active_profile_connected = state->active_profile_connected;
     widget->state.active_profile_bonded = state->active_profile_bonded;
 
-    draw_top(widget->obj, widget->cbuf, &widget->state);
-    draw_bottom(widget->obj, widget->cbuf3, &widget->state);
+    draw_canvas(widget->obj, widget->cbuf, &widget->state);
 }
 
 static void output_status_update_cb(struct output_status_state state) {
@@ -182,7 +189,7 @@ static void set_wpm_status(struct zmk_widget_screen *widget, struct wpm_status_s
     }
     widget->state.wpm[9] = state.wpm;
 
-    draw_middle(widget->obj, widget->cbuf2, &widget->state);
+    draw_canvas(widget->obj, widget->cbuf, &widget->state);
 }
 
 static void wpm_status_update_cb(struct wpm_status_state state) {
@@ -204,19 +211,11 @@ ZMK_SUBSCRIPTION(widget_wpm_status, zmk_wpm_state_changed);
 
 int zmk_widget_screen_init(struct zmk_widget_screen *widget, lv_obj_t *parent) {
     widget->obj = lv_obj_create(parent);
-    lv_obj_set_size(widget->obj, SCREEN_HEIGHT, SCREEN_WIDTH);
+    lv_obj_set_size(widget->obj, CANVAS_HEIGHT, CANVAS_WIDTH);
 
-    lv_obj_t *top = lv_canvas_create(widget->obj);
-    lv_obj_align(top, LV_ALIGN_TOP_RIGHT, 0, 0);
-    lv_canvas_set_buffer(top, widget->cbuf, BUFFER_SIZE, BUFFER_SIZE, LV_IMG_CF_TRUE_COLOR);
-
-    lv_obj_t *middle = lv_canvas_create(widget->obj);
-    lv_obj_align(middle, LV_ALIGN_TOP_RIGHT, BUFFER_OFFSET_MIDDLE, 0);
-    lv_canvas_set_buffer(middle, widget->cbuf2, BUFFER_SIZE, BUFFER_SIZE, LV_IMG_CF_TRUE_COLOR);
-
-    lv_obj_t *bottom = lv_canvas_create(widget->obj);
-    lv_obj_align(bottom, LV_ALIGN_TOP_RIGHT, BUFFER_OFFSET_BOTTOM, 0);
-    lv_canvas_set_buffer(bottom, widget->cbuf3, BUFFER_SIZE, BUFFER_SIZE, LV_IMG_CF_TRUE_COLOR);
+    lv_obj_t *canvas = lv_canvas_create(widget->obj);
+    lv_obj_align(canvas, LV_ALIGN_TOP_LEFT, 0, 0);
+    lv_canvas_set_buffer(canvas, widget->cbuf, CANVAS_HEIGHT, CANVAS_HEIGHT, LV_IMG_CF_TRUE_COLOR);
 
     sys_slist_append(&widgets, &widget->node);
     widget_battery_status_init();
@@ -224,6 +223,20 @@ int zmk_widget_screen_init(struct zmk_widget_screen *widget, lv_obj_t *parent) {
     widget_output_status_init();
     widget_wpm_status_init();
 
+#if IS_ENABLED(CONFIG_NICE_OLED_WIDGET_WPM)
+    zmk_widget_luna_init(&luna_widget, canvas);
+
+    // ori: lv_obj_align(zmk_widget_luna_obj(&luna_widget), LV_ALIGN_TOP_LEFT, 36, 0);
+    lv_obj_align(zmk_widget_luna_obj(&luna_widget), LV_ALIGN_TOP_LEFT, 100, 15);
+#endif
+
+#if IS_ENABLED(CONFIG_NICE_OLED_WIDGET_HID_INDICATORS)
+    zmk_widget_hid_indicators_init(&hid_indicators_widget, canvas);
+#endif
+
+#if IS_ENABLED(CONFIG_NICE_OLED_WIDGET_MODIFIERS_INDICATORS)
+    zmk_widget_modifiers_init(&modifiers_widget, canvas); // Inicializar el widget de modifiers
+#endif
     return 0;
 }
 

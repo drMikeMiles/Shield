@@ -74,7 +74,7 @@ static void draw_bottom(lv_obj_t *widget, lv_color_t cbuf[], const struct status
 #if IS_ENABLED(CONFIG_ZMK_HID_INDICATORS)
 static struct zmk_widget_hid_indicators hid_indicators_widget;
 #endif
-#lv_style_t global_style;
+
 
 lv_obj_t *zmk_display_status_screen() {
     lv_obj_t *screen;

@@ -9,9 +9,10 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 
 #if IS_ENABLED(CONFIG_NICE_VIEW_WIDGET_STATUS)
 static struct zmk_widget_screen screen_widget;
+static struct zmk_widget_hid_indicators hid_indicators_widget;
 #endif
 #if IS_ENABLED(CONFIG_ZMK_HID_INDICATORS)
-static struct zmk_widget_hid_indicators hid_indicators_widget;
+
 #endif
 
 lv_style_t global_style;

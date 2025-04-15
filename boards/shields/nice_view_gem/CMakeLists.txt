@@ -7,6 +7,7 @@ if(CONFIG_ZMK_DISPLAY AND CONFIG_NICE_VIEW_WIDGET_STATUS)
   zephyr_library_sources(widgets/L/output.c)
   zephyr_library_sources(widgets/R/batteryR.c)
   zephyr_library_sources(widgets/R/outputR.c)
+  target_sources_ifdef(CONFIG_ZMK_HID_INDICATORS app PRIVATE widgets/L/hid_indicators.c)
 
   
   if(NOT CONFIG_ZMK_SPLIT OR CONFIG_ZMK_SPLIT_ROLE_CENTRAL)

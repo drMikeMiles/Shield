@@ -62,4 +62,13 @@ endif # !ZMK_SPLIT || ZMK_SPLIT_ROLE_CENTRAL
 
 endif # SHIELD_NICE_VIEW_GEM
 
+### NICE VIEW WIDGET HID INDICATORS
+config NICE_VIEW_WIDGET_HID_INDICATORS
+    bool "Enable HID indicators"
+    default y
 
+if NICE_VIEW_WIDGET_HID_INDICATORS
+
+config ZMK_HID_INDICATORS
+    bool "Enable HID indicators"
+    default y

@@ -18,9 +18,9 @@ LOG_MODULE_DECLARE(zmk, CONFIG_ZMK_LOG_LEVEL);
 #include <zmk/usb.h>
 #include <zmk/wpm.h>
 
-#include "battery.h"
+#include "L/battery.h"
 #include "layer.h"
-#include "output.h"
+#include "L/output.h"
 #include "profile.h"
 #include "screen.h"
 #include "wpm.h"

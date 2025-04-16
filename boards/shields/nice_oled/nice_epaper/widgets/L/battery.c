@@ -1,6 +1,6 @@
 #include <zephyr/kernel.h>
 #include "battery.h"
-#include "../assets/custom_fonts.h"
+#include "../../assets/custom_fonts.h"
 
 LV_IMG_DECLARE(bolt);
 

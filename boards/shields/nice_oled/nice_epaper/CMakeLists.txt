@@ -4,8 +4,8 @@ if(CONFIG_ZMK_DISPLAY AND CONFIG_NICE_VIEW_WIDGET_STATUS)
   zephyr_library_sources(assets/images.c)
   zephyr_library_sources(widgets/R/battery.c)
   zephyr_library_sources(widgets/R/output.c)
-  zephyr_library_sources(widgets/battery.c)
-  zephyr_library_sources(widgets/output.c)
+  zephyr_library_sources(widgets/L/battery.c)
+  zephyr_library_sources(widgets/L/output.c)
   zephyr_library_sources(widgets/util.c)
 
 

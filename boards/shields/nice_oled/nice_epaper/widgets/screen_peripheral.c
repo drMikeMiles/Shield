@@ -29,8 +29,8 @@ static void draw_canvas(lv_obj_t *widget, lv_color_t cbuf[], const struct status
 
     // Draw widgets
     draw_background(canvas);
-    draw_output_status(canvas, state);
-    draw_battery_status(canvas, state);
+    draw_output_status_right(canvas, state);
+    draw_battery_status_right(canvas, state);
 
     // Rotate for horizontal display
     rotate_canvas(canvas, cbuf);
